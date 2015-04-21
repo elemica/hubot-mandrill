@@ -1,0 +1,25 @@
+{
+  "name": "hubot-mandrill",
+  "version": "1.0.0",
+  "description": "Hubot script to remotely connect to Mandrill",
+  "main": "index.coffee",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elemica/hubot-mandrill.git"
+  },
+  "keywords": [
+    "hubot",
+    "mandrill",
+    "mailchimp"
+  ],
+  "author": "@riveramj",
+  "license": "Apache License 2.0",
+  "bugs": {
+    "url": "https://github.com/elemica/hubot-mandrill/issues"
+  },
+  "homepage": "https://github.com/elemica/hubot-mandrill",
+  "dependencies": {
+    "coffee-script": "~1.6",
+    "mandrill-api": "*"
+  }
+}
