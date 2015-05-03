@@ -10,7 +10,8 @@
   "keywords": [
     "hubot",
     "mandrill",
-    "mailchimp"
+    "mailchimp",
+    "hubot-scripts"
   ],
   "author": "@riveramj",
   "license": "Apache License 2.0",
