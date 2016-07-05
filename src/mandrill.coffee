@@ -11,6 +11,7 @@
 #   hubot (I'm|I'm|Im|I am) missing (an) email - Show Mandrill email backlog count.
 #   hubot (mandrill|email) (blacklog|queue) - Show Mandrill email backlog count.
 #   hubot find email (with|that contains) {name, subject, text, etc} - Searches today's emails and displays matches. Supports specified search terms. Subject:{text}, email{text}, etc
+#   hubot find all email (with|that contains) {name, subject, text, etc} - Searches emails from the past 90 days and displays matches. Supports specified search terms. Subject:{text}, email{text}, etc
 #
 # Author: 
 #   @riveramj
