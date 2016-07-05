@@ -33,29 +33,16 @@ module.exports = (robot) ->
         client[1].users.info {}, (user) ->
           msg.send "#{client[0]} : #{user.backlog}"
 
-  robot.respond /(I'm|I'm|Im|I am)\s?missing (an )?email/i, (msg) ->
-    msg.send "Looking to see if it's in the backlog."
-    getUsersForAllAccounts msg
-
-  robot.respond /(mandrill|email) (backlog|queue)/i, (msg) ->
-    msg.send "Retrieving backlog. This may take a second."
-    getUsersForAllAccounts msg
-
-  robot.respond /find email (?:with|that contains) (.*)/i, (msg) ->
-    query = msg.match[1].trim()
-    todayDate = new Date().toISOString().replace(/T.*/,'')
-    dateFrom = todayDate
-    dateTo = todayDate
-
+  findEmail = (msg, query, dateFrom, dateTo) ->
     mandrillClients[0][1].messages.search {"query": query, "date_from": dateFrom, "date_to": dateTo}, (emails)  ->
       if emails.length > 0
         for email in emails
           do (email) ->
             date = new Date(email.ts * 1000)
             opened = if email.opens > 0
-                      "yes"
-                     else
-                      "no"
+              "yes"
+            else
+              "no"
 
             msg.send """
               to: #{email.email}
@@ -68,3 +55,34 @@ module.exports = (robot) ->
       else
         msg.send "Did not find any emails"
 
+  robot.respond /(I'm|I'm|Im|I am)\s?missing (an )?email/i, (msg) ->
+    msg.send "Looking to see if it's in the backlog."
+    getUsersForAllAccounts msg
+
+  robot.respond /(mandrill|email) (backlog|queue)/i, (msg) ->
+    msg.send "Retrieving backlog. This may take a second."
+    getUsersForAllAccounts msg
+
+  robot.respond /find all email (?:with|that contains) (.*)/i, (msg) ->
+    query = msg.match[1].trim()
+
+    todayDate = new Date().toISOString().replace(/T.*/,'')
+    datePast = new Date()
+    datePast.setDate(datePast.getDate() - 90)
+    dateFrom = datePast.toISOString().replace(/T.*/,'')
+    dateTo = todayDate
+
+    msg.send """What we're gonna do right here is go back
+                Way back
+                Back into time
+              """
+
+    findEmail msg, query, dateFrom, dateTo
+
+  robot.respond /find email (?:with|that contains) (.*)/i, (msg) ->
+    query = msg.match[1].trim()
+    todayDate = new Date().toISOString().replace(/T.*/,'')
+    dateFrom = todayDate
+    dateTo = todayDate
+
+    findEmail msg, query, dateFrom, dateTo

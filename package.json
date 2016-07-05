@@ -1,6 +1,6 @@
 {
   "name": "hubot-mandrill",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hubot script to remotely connect to Mandrill",
   "main": "index.coffee",
   "repository": {
